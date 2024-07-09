@@ -16,7 +16,7 @@ The Automated Queuing System (AQS) is a web-based application designed to stream
 - **Backend:** Django, Django REST Framework, PostgreSQL
 - **Frontend:** React.js, Axios
 - **Authentication:** JWT (JSON Web Tokens) with djoser
-- **Deployment:** Docker, Docker Compose
+- **Deployment:** Github, Render
 - **Development Tools:** VS Code, Git
 
 ## Installation and Setup
@@ -24,12 +24,12 @@ The Automated Queuing System (AQS) is a web-based application designed to stream
 1. **Clone the Repository:**
 
    ```bash
-   git clone <repository-url>
-   cd <project-directory>
+   git clone https://github.com/king-tomi/queuing_system
+   cd queuing_system
 
 2.**Backend Setup:**
 
-- Ensure Python 3.x and pip are installed.
+- Ensure Python 3.9+ and pip are installed.
 - Install dependencies:
 
      ```bash

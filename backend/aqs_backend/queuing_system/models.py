@@ -14,6 +14,7 @@ class Customer(models.Model):
 class BankStaff(models.Model):
     full_name = models.CharField(max_length=150)
     staff_id = models.CharField(max_length=50, unique=True)
+    email = models.EmailField(unique=True)
     position = models.CharField(max_length=100)
 
     def __str__(self):

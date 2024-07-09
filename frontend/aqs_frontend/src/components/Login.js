@@ -1,27 +1,39 @@
-// src/components/Login.js
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../store/auth/authActions';
+import api from '../api'; // Adjusted path to api.js
+import '../styles/Login.css'; // Adjusted path to Login.css
 
 const Login = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatch();
+    const [role, setRole] = useState('customer'); // Default role
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        dispatch(login({ username, password }));
+        try {
+            const response = await api.post(`/${role}s/`, { email, password });
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            setError('');
+            // Redirect to the appropriate page based on role
+            if (role === 'customer') {
+                window.location.href = '/customer-dashboard';
+            } else if (role === 'bankstaff') {
+                window.location.href = '/staff-dashboard';
+            }
+        } catch (err) {
+            setError('Invalid email or password');
+        }
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="login-container">
+            <form onSubmit={handleLogin}>
                 <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                     type="password"
@@ -29,7 +41,12 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <select value={role} onChange={(e) => setRole(e.target.value)}>
+                    <option value="customer">Customer</option>
+                    <option value="bankstaff">Bank Staff</option>
+                </select>
                 <button type="submit">Login</button>
+                {error && <div className="error">{error}</div>}
             </form>
         </div>
     );
