@@ -11,11 +11,11 @@ from .views import (
 urlpatterns = [
     # Customers URLs
     path('customers/', CustomerListAPIView.as_view(), name='customer-list'),
-    path('customers/<int:pk>/', CustomerAPIView.as_view(), name='customer-detail'),
+    path('customers/single/', CustomerAPIView.as_view(), name='customer-detail'),
 
     # BankStaff URLs
-    path('bankstaff/', BankStaffListAPIView.as_view(), name='bankstaff-list'),
-    path('bankstaff/<int:pk>/', BankStaffAPIView.as_view(), name='bankstaff-detail'),
+    path('bankstaffs/', BankStaffListAPIView.as_view(), name='bankstaff-list'),
+    path('bankstaffs/single', BankStaffAPIView.as_view(), name='bankstaff-detail'),
 
     # QueueEntry URLs
     path('queues/', QueueEntryListAPIView.as_view(), name='queueentry-list'),

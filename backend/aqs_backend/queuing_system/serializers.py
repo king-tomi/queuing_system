@@ -8,19 +8,19 @@ from djoser.serializers import UserSerializer, UserCreateSerializer as BaseUserS
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'phone_number']
 
 # BankStaff Serializer
 class BankStaffSerializer(serializers.ModelSerializer):
     class Meta:
         model = BankStaff
-        fields = '__all__'
+        fields = ['full_name', 'staff_id', 'email', 'phone_number']
 
 # QueueEntry Serializer
 class QueueEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = QueueEntry
-        fields = '__all__'
+        fields = ['is_completed', 'description']
 
 class UserCreateSerializer(BaseUserSerializer):
     class Meta(BaseUserSerializer.Meta):

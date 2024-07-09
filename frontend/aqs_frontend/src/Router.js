@@ -1,19 +1,16 @@
 // src/Router.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
-import PrivateRoute from './components/PrivateRoute';
+import { Switch, Route } from 'react-router-dom';
+import HomePage from './components/Home';
+import LoginPage from './components/Login';
+// Import other components/routes as needed
 
 const AppRouter = () => (
-    <Router>
-        <Switch>
-            <Route path="/login" component={Login} />
-            <PrivateRoute path="/dashboard" component={Dashboard} />
-            <Route path="/" component={Home} />
-        </Switch>
-    </Router>
+    <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/login" component={LoginPage} />
+        {/* Add other routes */}
+    </Switch>
 );
 
 export default AppRouter;
