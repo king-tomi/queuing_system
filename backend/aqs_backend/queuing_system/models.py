@@ -5,7 +5,7 @@ from django.db import models
 class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, default='')
     phone_number = models.CharField(max_length=20)
 
     def __str__(self):
@@ -14,7 +14,7 @@ class Customer(models.Model):
 class BankStaff(models.Model):
     full_name = models.CharField(max_length=150)
     staff_id = models.CharField(max_length=50, unique=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, default='')
     position = models.CharField(max_length=100)
 
     def __str__(self):

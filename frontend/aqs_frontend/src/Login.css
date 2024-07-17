@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('../public/background.png') no-repeat center center;
+  background: url('../public/background.png') no-repeat center center fixed;
   background-size: cover;
 }
 
