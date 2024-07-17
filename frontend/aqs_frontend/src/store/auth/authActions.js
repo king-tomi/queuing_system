@@ -1,6 +1,6 @@
 // src/store/auth/authActions.js
 import axios from '../../axiosConfig';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 // Define your action types
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

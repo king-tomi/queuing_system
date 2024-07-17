@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../api'; // Adjusted path to api.js
-import '../styles/Login.css'; // Adjusted path to Login.css
+import '../Login.css'; // Adjusted path to Login.css
 
 const Login = () => {
     const [email, setEmail] = useState('');
