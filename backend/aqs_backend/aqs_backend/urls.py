@@ -18,11 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from queuing_system import urls as aqs_urls
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('aqs_v1/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('aqs_v1/schema/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger'),
     path('admin/', admin.site.urls),
+    path('aqs_v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('aqs_v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api-auth/', include('rest_framework.urls')),
     path('aqs_v1/', include(aqs_urls)),
     path('auth/', include('djoser.urls')),

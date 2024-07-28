@@ -1,25 +1,23 @@
-# Create your views here.
 # queuing_system/views.py
 
 from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
-from .models import Customer, BankStaff, QueueEntry
-from .serializers import CustomerSerializer, BankStaffSerializer, QueueEntrySerializer
+from .models import Customer, BankStaff, QueueEntry, TransactionType
+from .serializers import CustomerSerializer, BankStaffSerializer, QueueEntrySerializer, TransactionTypeSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .permissions import IsOwner
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .utils import get_least_busy_staff, send_assignment_notification
 from django.db.models import Count
-    
+
 # Customer ListAPIView and APIView
 class CustomerListAPIView(GenericAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsOwner]
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
-
 
     def get(self, request):
         customers = self.get_queryset()
@@ -83,7 +81,6 @@ class CustomerAPIView(GenericAPIView):
         customer = self.get_object(email, password)
         customer.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 # BankStaff ListAPIView and APIView
 class BankStaffListAPIView(GenericAPIView):
@@ -154,7 +151,6 @@ class BankStaffAPIView(GenericAPIView):
         bankstaff.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 # QueueEntry ListAPIView and APIView
 class QueueEntryListAPIView(GenericAPIView):
     authentication_classes = [JWTAuthentication]
@@ -219,7 +215,7 @@ class QueueEntryAPIView(GenericAPIView):
         queueentry = self.get_object(pk)
         queueentry.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
+
 class DashboardOverviewAPIView(GenericAPIView):
     permission_classes = [IsAdminUser]
 
@@ -227,7 +223,7 @@ class DashboardOverviewAPIView(GenericAPIView):
         total_queues = QueueEntry.objects.count()
         active_queues = QueueEntry.objects.filter(status='Active').count()
         completed_queues = QueueEntry.objects.filter(status='Completed').count()
-        staff_loads = QueueEntry.objects.values('staff').annotate(total=Count('id')).order_by('-total')
+        staff_loads = QueueEntry.objects.values('bank_staff__full_name').annotate(total=Count('id')).order_by('-total')
         
         data = {
             'total_queues': total_queues,
@@ -241,5 +237,5 @@ class StaffQueueLoadAPIView(GenericAPIView):
     permission_classes = [IsAdminUser]
 
     def get(self, request):
-        staff_loads = QueueEntry.objects.values('staff__name').annotate(total=Count('id')).order_by('-total')
+        staff_loads = QueueEntry.objects.values('bank_staff__full_name').annotate(total=Count('id')).order_by('-total')
         return Response(staff_loads)
