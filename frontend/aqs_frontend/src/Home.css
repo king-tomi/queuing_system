@@ -1,46 +1,65 @@
 .home-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     height: 100vh;
-    background: url('../public/background.png') no-repeat center center fixed;
-    background-size: cover;
+    background-color: #ff0000; /* Adjust as needed */
     color: white;
-}
-
-.home-header {
+  }
+  
+  .home-header {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding: 20px;
-}
-
-.login-button {
-    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    background-color: #990000; /* Adjust as needed */
+  }
+  
+  .logout-button {
+    background-color: transparent;
+    border: 1px solid white;
     color: white;
-    border: none;
-    padding: 10px 20px;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-}
-
-.home-content {
+    font-size: 1rem;
+  }
+  
+  .home-content {
     text-align: center;
-    backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.home-footer {
-    width: 100%;
+    flex-grow: 1;
+  }
+  
+  .service-options {
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.home-footer span {
-    color: white;
-}
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .service-option {
+    margin: 0 1rem;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .service-option img {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    margin-bottom: 1rem;
+  }
+  
+  .service-option button {
+    background-color: white;
+    border: none;
+    color: #990000; /* Adjust as needed */
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .home-footer {
+    background-color: #990000; /* Adjust as needed */
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+  }  
